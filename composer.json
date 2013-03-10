@@ -11,5 +11,14 @@
     ],
     "autoload": {
         "psr-0": { "Emmetog\\Config\\": "src" }
-    }
+    },
+    "require": {
+        "emmetog/cache":		    "@dev"
+    },
+    "repositories": [
+        {
+            "type":                         "vcs",
+            "url":                          "https://github.com/emmetog/cache.git"
+        }
+    ]
 }

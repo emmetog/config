@@ -7,24 +7,43 @@ use Emmetog\Cache\CacheInterface;
 class Config
 {
 
+    /**
+     * An array of the loaded config files.
+     * 
+     * @var array
+     */
     private $configs_loaded = array();
-    private $application_root;
+    
+    /**
+     * The full path to the directory where the config files are to be loaded from.
+     * 
+     * @var string
+     */
+    private $config_directory;
 
     /**
      * The cache object.
      * 
-     * @var \Apl\Cache\CacheInterface
+     * @var \Emmetog\Cache\CacheInterface
      */
     private $cache;
 
-    public function __construct($application_root, CacheInterface $cache)
+    /**
+     * Creates a new Config object.
+     * 
+     * @param string $config_directory The full path to the directory where the config files are to be loaded from.
+     * @param \Emmetog\Cache\CacheInterface $cache
+     */
+    public function __construct($config_directory, CacheInterface $cache)
     {
-        if (substr($application_root, strlen($application_root) - 1) != DIRECTORY_SEPARATOR)
+        if (substr($config_directory, strlen($config_directory) - 1) != DIRECTORY_SEPARATOR)
         {
-            $application_root .= DIRECTORY_SEPARATOR;
+            $config_directory .= DIRECTORY_SEPARATOR;
         }
 
-        $this->application_root = $application_root;
+        $this->config_directory = $config_directory;
+        
+        $this->cache = $cache;
     }
 
     public function getClass($className)
@@ -94,21 +113,11 @@ class Config
     /**
      * Gets the cache object.
      * 
-     * @return \Apl\Cache\CacheInterface
+     * @return \Emmetog\Cache\CacheInterface
      */
     public function getCache()
     {
         return $this->cache;
-    }
-
-    public function setApplicationRoot($application_root)
-    {
-        $this->application_root = $application_root;
-    }
-
-    public function getApplicationRoot()
-    {
-        return $this->application_root;
     }
 
     public function getDatabaseConfig($profile)
@@ -118,7 +127,7 @@ class Config
 
     protected function getConfigDirectory()
     {
-        return $this->application_root . 'Config' . DIRECTORY_SEPARATOR;
+        return $this->config_directory;
     }
 
 }
