@@ -1,0 +1,60 @@
+{
+    "hash": "0bae232857726cdd331b969e5a48d85a",
+    "packages": [
+        {
+            "name": "emmetog/cache",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/emmetog/cache.git",
+                "reference": "98de222799c643736d88f66e36fa90fab763ad75"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/emmetog/cache/zipball/98de222799c643736d88f66e36fa90fab763ad75",
+                "reference": "98de222799c643736d88f66e36fa90fab763ad75",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Emmetog\\Cache\\": "src"
+                }
+            },
+            "license": [
+                "GPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Emmet O'Grady",
+                    "email": "emmet789@gmail.com"
+                }
+            ],
+            "description": "Classes that act as caches",
+            "keywords": [
+                "cache"
+            ],
+            "support": {
+                "source": "https://github.com/emmetog/cache/tree/master",
+                "issues": "https://github.com/emmetog/cache/issues"
+            },
+            "time": "2013-03-10 01:31:31"
+        }
+    ],
+    "packages-dev": [
+
+    ],
+    "aliases": [
+
+    ],
+    "minimum-stability": "stable",
+    "stability-flags": {
+        "emmetog/cache": 20
+    },
+    "platform": [
+
+    ],
+    "platform-dev": [
+
+    ]
+}
