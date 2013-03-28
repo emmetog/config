@@ -1,5 +1,5 @@
 {
-    "hash": "0bae232857726cdd331b969e5a48d85a",
+    "hash": "10ba9b53511640b75b3e56ee88ed9965",
     "packages": [
         {
             "name": "emmetog/cache",
@@ -7,12 +7,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/emmetog/cache.git",
-                "reference": "98de222799c643736d88f66e36fa90fab763ad75"
+                "reference": "d03afe9078e868986bfcd13ea5f9af41b540acc9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/emmetog/cache/zipball/98de222799c643736d88f66e36fa90fab763ad75",
-                "reference": "98de222799c643736d88f66e36fa90fab763ad75",
+                "url": "https://api.github.com/repos/emmetog/cache/zipball/d03afe9078e868986bfcd13ea5f9af41b540acc9",
+                "reference": "d03afe9078e868986bfcd13ea5f9af41b540acc9",
                 "shasum": ""
             },
             "type": "library",
@@ -38,7 +38,7 @@
                 "source": "https://github.com/emmetog/cache/tree/master",
                 "issues": "https://github.com/emmetog/cache/issues"
             },
-            "time": "2013-03-10 01:31:31"
+            "time": "2013-03-28 20:31:46"
         }
     ],
     "packages-dev": [
@@ -47,7 +47,7 @@
     "aliases": [
 
     ],
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "stability-flags": {
         "emmetog/cache": 20
     },

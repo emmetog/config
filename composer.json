@@ -9,6 +9,7 @@
             "email": "emmet789@gmail.com"
         }
     ],
+    "minimum-stability": "dev",
     "autoload": {
         "psr-0": { "Emmetog\\Config\\": "src" }
     },
