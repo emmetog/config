@@ -1,4 +1,8 @@
 {
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
+    ],
     "hash": "10ba9b53511640b75b3e56ee88ed9965",
     "packages": [
         {
@@ -7,12 +11,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/emmetog/cache.git",
-                "reference": "d03afe9078e868986bfcd13ea5f9af41b540acc9"
+                "reference": "e1f86aad9095d2f6f3e9c1b8d0848263a25f2918"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/emmetog/cache/zipball/d03afe9078e868986bfcd13ea5f9af41b540acc9",
-                "reference": "d03afe9078e868986bfcd13ea5f9af41b540acc9",
+                "url": "https://api.github.com/repos/emmetog/cache/zipball/e1f86aad9095d2f6f3e9c1b8d0848263a25f2918",
+                "reference": "e1f86aad9095d2f6f3e9c1b8d0848263a25f2918",
                 "shasum": ""
             },
             "type": "library",
@@ -38,7 +42,7 @@
                 "source": "https://github.com/emmetog/cache/tree/master",
                 "issues": "https://github.com/emmetog/cache/issues"
             },
-            "time": "2013-03-28 20:31:46"
+            "time": "2013-05-01 21:16:33"
         }
     ],
     "packages-dev": [

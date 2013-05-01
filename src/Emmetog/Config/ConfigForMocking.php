@@ -2,7 +2,10 @@
 
 namespace Emmetog\Config;
 
-class ConfigForMocking extends \Emmetog\Config\Config
+use Emmetog\Config\Config;
+use \Exception;
+
+class ConfigForMocking extends Config
 {
 
     /**
@@ -11,7 +14,7 @@ class ConfigForMocking extends \Emmetog\Config\Config
      * @var array
      */
     private $loadedConfigs = array();
-
+    
     public function getDatabaseConfig($profile)
     {
         return $this->getConfiguration('database', 'test', true);
@@ -46,7 +49,7 @@ class ConfigForMocking extends \Emmetog\Config\Config
 
 }
 
-class ConfigForMockingException extends \Exception
+class ConfigForMockingException extends Exception
 {
     
 }

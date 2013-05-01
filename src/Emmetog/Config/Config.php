@@ -125,7 +125,7 @@ class Config
         return $this->getConfiguration('database', $profile);
     }
 
-    protected function getConfigDirectory()
+    public function getConfigDirectory()
     {
         return $this->config_directory;
     }
