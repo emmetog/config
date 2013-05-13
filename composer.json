@@ -9,12 +9,12 @@
             "email": "emmet789@gmail.com"
         }
     ],
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "autoload": {
         "psr-0": { "Emmetog\\Config\\": "src" }
     },
     "require": {
-        "emmetog/cache":		    "@dev"
+        "emmetog/cache":		    "1.0.*"
     },
     "repositories": [
         {

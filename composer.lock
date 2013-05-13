@@ -3,20 +3,20 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "10ba9b53511640b75b3e56ee88ed9965",
+    "hash": "b140922ca76f54fdd423ac54ca2d5c0a",
     "packages": [
         {
             "name": "emmetog/cache",
-            "version": "dev-master",
+            "version": "v1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/emmetog/cache.git",
-                "reference": "e1f86aad9095d2f6f3e9c1b8d0848263a25f2918"
+                "reference": "v1.0.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/emmetog/cache/zipball/e1f86aad9095d2f6f3e9c1b8d0848263a25f2918",
-                "reference": "e1f86aad9095d2f6f3e9c1b8d0848263a25f2918",
+                "url": "https://api.github.com/repos/emmetog/cache/zipball/v1.0.0",
+                "reference": "v1.0.0",
                 "shasum": ""
             },
             "type": "library",
@@ -34,15 +34,17 @@
                     "email": "emmet789@gmail.com"
                 }
             ],
-            "description": "Classes that act as caches",
+            "description": "A collection of PHP classes which act as caches",
             "keywords": [
-                "cache"
+                "cache",
+                "memecached",
+                "registry"
             ],
             "support": {
-                "source": "https://github.com/emmetog/cache/tree/master",
+                "source": "https://github.com/emmetog/cache/tree/v1.0.0",
                 "issues": "https://github.com/emmetog/cache/issues"
             },
-            "time": "2013-05-01 21:16:33"
+            "time": "2013-05-13 18:40:45"
         }
     ],
     "packages-dev": [
@@ -51,10 +53,10 @@
     "aliases": [
 
     ],
-    "minimum-stability": "dev",
-    "stability-flags": {
-        "emmetog/cache": 20
-    },
+    "minimum-stability": "stable",
+    "stability-flags": [
+
+    ],
     "platform": [
 
     ],
