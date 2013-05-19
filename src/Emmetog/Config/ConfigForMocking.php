@@ -13,6 +13,20 @@ class ConfigForMocking extends Config
 {
 
     /**
+     * Whether or not unmocked models are allowed.
+     *
+     * @var boolean
+     */
+    private $isUnmockedClassesAllowed = false;
+
+    /**
+     * An array of all the classes that have been mocked.
+     *
+     * @var array
+     */
+    private $mockedClasses = array();
+
+    /**
      * An array of the loaded (mocked) config values.
      * 
      * @var array
@@ -80,6 +94,78 @@ class ConfigForMocking extends Config
 	$this->loadedConfigs[$group] = $value;
     }
 
+    /**
+     * Overwrites the parent getClass() method.
+     * 
+     * Throws an error if any unmocked model is used.
+     * 
+     * @param type $className
+     */
+    public function getClass($className)
+    {
+	// Check if the class has been mocked.
+	if (array_key_exists($className, $this->mockedClasses))
+	{
+	    return $this->mockedClasses[$className];
+	}
+
+	if ($this->isUnmockedClassesAllowed())
+	{
+	    return parent::getClass($className);
+	}
+
+	throw new ConfigForMockingUnmockedClassRequestedException(
+	    'The class "' . $className . '" was not mocked'
+	);
+    }
+    
+    /**
+     * Sets a class to be used when getClass() is called.
+     * 
+     * @param string $className The name of the class to set.
+     * @param object $object The object that should be returned.
+     */
+    public function setClass($className, $object)
+    {
+	$className = (string) $className;
+	
+	$this->mockedClasses[$className] = $object;
+    }
+
+    /**
+     * Sets whether unmocked classes (real ones) are allowed or not.
+     * 
+     * If unmocked classes are not allowed then the UT will raise an error
+     * if $config->getClass() is used to get a class that has not been
+     * mocked in the UT.
+     * 
+     * The default is that unmocked classes are NOT allowed, meaning that
+     * all the classes except the one under test must be mocked.
+     * 
+     * @param boolean $allowed True if it is ok for a UT to use classes that have not been mocked.
+     */
+    public function setUnmockedClassesAllowed($allowed = true)
+    {
+	$this->isUnmockedClassesAllowed = (bool) $allowed;
+    }
+
+    /**
+     * Returns a boolean depending on if unmocked classes are allowed or not.
+     * 
+     * If unmocked classes are not allowed then the UT will raise an error
+     * if $config->getClass() is used to get a class that has not been
+     * mocked in the UT.
+     * 
+     * The default is that unmocked classes are NOT allowed, meaning that
+     * all the classes except the one under test must be mocked.
+     * 
+     * @return boolean
+     */
+    public function isUnmockedClassesAllowed()
+    {
+	return (boolean) $this->isUnmockedClassesAllowed;
+    }
+
 }
 
 class ConfigForMockingException extends Exception
@@ -93,6 +179,11 @@ class ConfigForMockingConfigurationGroupNotMockedException extends ConfigForMock
 }
 
 class ConfigForMockingConfigurationValueNotMockedException extends ConfigForMockingException
+{
+    
+}
+
+class ConfigForMockingUnmockedClassRequestedException extends ConfigForMockingException
 {
     
 }
