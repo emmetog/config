@@ -14,12 +14,6 @@
         "psr-0": { "Emmetog\\Config\\": "src" }
     },
     "require": {
-        "emmetog/cache":		    "1.0.*"
-    },
-    "repositories": [
-        {
-            "type":                         "vcs",
-            "url":                          "https://github.com/emmetog/cache.git"
-        }
-    ]
+        "emmetog/cache":		    "~1.0"
+    }
 }

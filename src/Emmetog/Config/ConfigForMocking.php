@@ -13,11 +13,18 @@ class ConfigForMocking extends Config
 {
 
     /**
-     * Whether or not unmocked models are allowed.
+     * Whether or not unmocked models are allowed in the test.
      *
      * @var boolean
      */
     private $isUnmockedClassesAllowed = false;
+    
+    /**
+     * Whether or not real configs are allowed in the test.
+     *
+     * @var boolean
+     */
+    private $areRealConfigsAllowed = false;
 
     /**
      * An array of all the classes that have been mocked.
@@ -59,7 +66,7 @@ class ConfigForMocking extends Config
      * @throws ConfigForMockingConfigurationGroupNotMockedException If the config file was not mocked.
      * @throws ConfigForMockingConfigurationValueNotMockedException If the config value was not mocked.
      */
-    public function getConfiguration($group, $value = '', $useRealConfigValue = false)
+    public function getConfiguration($group, $value = '')
     {
 	if ($useRealConfigValue)
 	{
@@ -164,6 +171,40 @@ class ConfigForMocking extends Config
     public function isUnmockedClassesAllowed()
     {
 	return (boolean) $this->isUnmockedClassesAllowed;
+    }
+
+    /**
+     * Sets whether real config values are allowed in the unit tests or not.
+     * 
+     * If real configs are not allowed then the UT will raise an error
+     * if $config->getConfiguration() is used to get a config that has not been
+     * mocked in the UT.
+     * 
+     * The default is that real configs are NOT allowed, meaning that
+     * all configs must be mocked.
+     * 
+     * @param boolean $allowed True if it is ok for a UT to use real config values.
+     */
+    public function setRealConfigsAllowed($allowed = true)
+    {
+	$this->areRealConfigsAllowed = (bool) $allowed;
+    }
+
+    /**
+     * Returns a boolean depending on if real config values are allowed or not.
+     * 
+     * If real config values are not allowed then the UT will raise an error
+     * if $config->getConfiguration() is used to get a config that has not been
+     * mocked in the UT.
+     * 
+     * The default is that real config values are NOT allowed, meaning that
+     * all the configs must be mocked.
+     * 
+     * @return boolean
+     */
+    public function areRealConfigsAllowed()
+    {
+	return (boolean) $this->areRealConfigsAllowed;
     }
 
 }

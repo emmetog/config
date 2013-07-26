@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "b140922ca76f54fdd423ac54ca2d5c0a",
+    "hash": "587b9a52ccb79bd54e84521b9fb2f601",
     "packages": [
         {
             "name": "emmetog/cache",
