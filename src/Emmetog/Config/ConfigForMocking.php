@@ -68,7 +68,7 @@ class ConfigForMocking extends Config
      */
     public function getConfiguration($group, $value = '')
     {
-	if ($useRealConfigValue)
+	if ($this->areRealConfigsAllowed)
 	{
 	    return parent::getConfiguration($group, $value);
 	}
