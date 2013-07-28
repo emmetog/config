@@ -66,9 +66,13 @@ class Config
         {
             throw new ConfigClassNotFoundException('The class "' . $className . '" was not found');
         }
+        
+        $newClass = new $className();
 
-        // We pass the $config object into the constructor if the class implements HasConfig.
-        $newClass = (array_key_exists('HasConfig', class_implements($className))) ? new $className($this) : new $className();
+        if(method_exists($newClass, 'setConfig'))
+        {
+            $newClass->setConfig($this);
+        }
         
         return $newClass;
     }
