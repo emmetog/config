@@ -39,14 +39,14 @@ class Config
      */
     public function __construct($config_directory, CacheInterface $cache)
     {
-	if (substr($config_directory, strlen($config_directory) - 1) != DIRECTORY_SEPARATOR)
-	{
-	    $config_directory .= DIRECTORY_SEPARATOR;
-	}
+        if (substr($config_directory, strlen($config_directory) - 1) != DIRECTORY_SEPARATOR)
+        {
+            $config_directory .= DIRECTORY_SEPARATOR;
+        }
 
-	$this->config_directory = $config_directory;
+        $this->config_directory = $config_directory;
 
-	$this->cache = $cache;
+        $this->cache = $cache;
     }
 
     /**
@@ -62,12 +62,15 @@ class Config
      */
     public function getClass($className)
     {
-	if (!class_exists($className, true))
-	{
-	    throw new ConfigClassNotFoundException('The class "' . $className . '" was not found');
-	}
+        if (!class_exists($className, true))
+        {
+            throw new ConfigClassNotFoundException('The class "' . $className . '" was not found');
+        }
 
-	return new $className($this);
+        // We pass the $config object into the constructor if the class implements HasConfig.
+        $newClass = (array_key_exists('HasConfig', class_implements($className))) ? new $className($this) : new $className();
+        
+        return $newClass;
     }
 
     /**
@@ -92,33 +95,33 @@ class Config
     public function getConfiguration($group, $value = '')
     {
 
-	if (!isset($this->configs_loaded[$group]))
-	{
-	    // The file is not loaded yet, try to load it.
-	    $configFile = $this->getConfigDirectory() . $group . '.config.php';
+        if (!isset($this->configs_loaded[$group]))
+        {
+            // The file is not loaded yet, try to load it.
+            $configFile = $this->getConfigDirectory() . $group . '.config.php';
 
-	    if (!file_exists($configFile))
-	    {
-		throw new ConfigFileNotFoundException('Config file not found: ' . $configFile);
-	    }
+            if (!file_exists($configFile))
+            {
+                throw new ConfigFileNotFoundException('Config file not found: ' . $configFile);
+            }
 
-	    $config				 = array();
-	    require $configFile;
-	    $this->configs_loaded[$group]	 = $config;
-	}
+            $config = array();
+            require $configFile;
+            $this->configs_loaded[$group] = $config;
+        }
 
-	$box = $this->configs_loaded[$group];
+        $box = $this->configs_loaded[$group];
 
-	try
-	{
-	    $box = $this->getConfigurationFromArray($value, $box);
-	}
-	catch (ConfigValueNotFoundException $e)
-	{
-	    throw new ConfigValueNotFoundException('The value "' . $value . '" was not found in the config file "' . $group . '"');
-	}
+        try
+        {
+            $box = $this->getConfigurationFromArray($value, $box);
+        }
+        catch (ConfigValueNotFoundException $e)
+        {
+            throw new ConfigValueNotFoundException('The value "' . $value . '" was not found in the config file "' . $group . '"');
+        }
 
-	return $box;
+        return $box;
     }
 
     /**
@@ -134,26 +137,26 @@ class Config
      */
     protected function getConfigurationFromArray($value, $configArray)
     {
-	$originalValue	 = $value;
-	// First split the $value by dots.
-	$value		 = explode('.', $value);
+        $originalValue = $value;
+        // First split the $value by dots.
+        $value = explode('.', $value);
 
-	if (count($value) <= 1 && empty($value[0]))
-	{
-	    return $configArray;
-	}
+        if (count($value) <= 1 && empty($value[0]))
+        {
+            return $configArray;
+        }
 
-	foreach ($value as $k => $v)
-	{
-	    if (is_array($configArray) && isset($configArray[$v]))
-	    {
-		$configArray = $configArray[$v];
-		continue;
-	    }
-	    throw new ConfigValueNotFoundException();
-	}
+        foreach ($value as $k => $v)
+        {
+            if (is_array($configArray) && isset($configArray[$v]))
+            {
+                $configArray = $configArray[$v];
+                continue;
+            }
+            throw new ConfigValueNotFoundException();
+        }
 
-	return $configArray;
+        return $configArray;
     }
 
     /**
@@ -163,7 +166,7 @@ class Config
      */
     public function getCache()
     {
-	return $this->cache;
+        return $this->cache;
     }
 
     /**
@@ -175,7 +178,7 @@ class Config
      */
     public function getDatabaseConfig($profile)
     {
-	return $this->getConfiguration('database', $profile);
+        return $this->getConfiguration('database', $profile);
     }
 
     /**
@@ -185,7 +188,7 @@ class Config
      */
     public function getConfigDirectory()
     {
-	return $this->config_directory;
+        return $this->config_directory;
     }
 
 }
