@@ -18,7 +18,7 @@ class ConfigForMocking extends Config
      * @var boolean
      */
     private $isUnmockedClassesAllowed = false;
-    
+
     /**
      * Whether or not real configs are allowed in the test.
      *
@@ -41,6 +41,15 @@ class ConfigForMocking extends Config
     private $loadedConfigs = array();
 
     /**
+     * The config files that can be loaded even if $areRealConfigsAllowed is set to false.
+     *
+     * @var array 
+     */
+    private $alwaysAllowedRealConfigs = array(
+        'database',
+    );
+
+    /**
      * Gets the database configuration for a certain profile.
      * 
      * @see Emmetog\Config\Config::getDatabaseConfig()
@@ -50,7 +59,7 @@ class ConfigForMocking extends Config
      */
     public function getDatabaseConfig($profile)
     {
-	return $this->getConfiguration('database', 'test', true);
+        return $this->getConfiguration('database', 'test', true);
     }
 
     /**
@@ -68,24 +77,24 @@ class ConfigForMocking extends Config
      */
     public function getConfiguration($group, $value = '')
     {
-	if ($this->areRealConfigsAllowed)
-	{
-	    return parent::getConfiguration($group, $value);
-	}
+        if ($this->areRealConfigsAllowed || in_array($group, $this->alwaysAllowedRealConfigs))
+        {
+            return parent::getConfiguration($group, $value);
+        }
 
-	if (!array_key_exists($group, $this->loadedConfigs))
-	{
-	    throw new ConfigForMockingConfigurationGroupNotMockedException('The configuration group ' . $group . ' was not mocked');
-	}
+        if (!array_key_exists($group, $this->loadedConfigs))
+        {
+            throw new ConfigForMockingConfigurationGroupNotMockedException('The configuration group ' . $group . ' was not mocked');
+        }
 
-	try
-	{
-	    return $this->getConfigurationFromArray($value, $this->loadedConfigs[$group]);
-	}
-	catch (ConfigValueNotFoundException $e)
-	{
-	    throw new ConfigForMockingConfigurationValueNotMockedException('The configuration value "' . $value . '" in the group "' . $group . '" was not mocked');
-	}
+        try
+        {
+            return $this->getConfigurationFromArray($value, $this->loadedConfigs[$group]);
+        }
+        catch (ConfigValueNotFoundException $e)
+        {
+            throw new ConfigForMockingConfigurationValueNotMockedException('The configuration value "' . $value . '" in the group "' . $group . '" was not mocked');
+        }
     }
 
     /**
@@ -98,7 +107,7 @@ class ConfigForMocking extends Config
      */
     public function setConfiguration($group, array $value)
     {
-	$this->loadedConfigs[$group] = $value;
+        $this->loadedConfigs[$group] = $value;
     }
 
     /**
@@ -110,22 +119,22 @@ class ConfigForMocking extends Config
      */
     public function getClass($className)
     {
-	// Check if the class has been mocked.
-	if (array_key_exists($className, $this->mockedClasses))
-	{
-	    return $this->mockedClasses[$className];
-	}
+        // Check if the class has been mocked.
+        if (array_key_exists($className, $this->mockedClasses))
+        {
+            return $this->mockedClasses[$className];
+        }
 
-	if ($this->isUnmockedClassesAllowed())
-	{
-	    return parent::getClass($className);
-	}
+        if ($this->isUnmockedClassesAllowed())
+        {
+            return parent::getClass($className);
+        }
 
-	throw new ConfigForMockingUnmockedClassRequestedException(
-	    'The class "' . $className . '" was not mocked'
-	);
+        throw new ConfigForMockingUnmockedClassRequestedException(
+        'The class "' . $className . '" was not mocked'
+        );
     }
-    
+
     /**
      * Sets a class to be used when getClass() is called.
      * 
@@ -134,9 +143,9 @@ class ConfigForMocking extends Config
      */
     public function setClass($className, $object)
     {
-	$className = (string) $className;
-	
-	$this->mockedClasses[$className] = $object;
+        $className = (string) $className;
+
+        $this->mockedClasses[$className] = $object;
     }
 
     /**
@@ -153,7 +162,7 @@ class ConfigForMocking extends Config
      */
     public function setUnmockedClassesAllowed($allowed = true)
     {
-	$this->isUnmockedClassesAllowed = (bool) $allowed;
+        $this->isUnmockedClassesAllowed = (bool) $allowed;
     }
 
     /**
@@ -170,7 +179,7 @@ class ConfigForMocking extends Config
      */
     public function isUnmockedClassesAllowed()
     {
-	return (boolean) $this->isUnmockedClassesAllowed;
+        return (boolean) $this->isUnmockedClassesAllowed;
     }
 
     /**
@@ -187,7 +196,7 @@ class ConfigForMocking extends Config
      */
     public function setRealConfigsAllowed($allowed = true)
     {
-	$this->areRealConfigsAllowed = (bool) $allowed;
+        $this->areRealConfigsAllowed = (bool) $allowed;
     }
 
     /**
@@ -204,7 +213,18 @@ class ConfigForMocking extends Config
      */
     public function areRealConfigsAllowed()
     {
-	return (boolean) $this->areRealConfigsAllowed;
+        return (boolean) $this->areRealConfigsAllowed;
+    }
+    
+    /**
+     * Sets an array of configs that should always be allowed, even if real configs
+     * are not allowed.
+     * 
+     * @param array $alwaysAllowedRealConfigs The array of configs to always allow.
+     */
+    public function setAlwaysAllowedRealConfigs(array $alwaysAllowedRealConfigs)
+    {
+        $this->alwaysAllowedRealConfigs = $alwaysAllowedRealConfigs;
     }
 
 }
