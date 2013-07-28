@@ -19,7 +19,7 @@ trait HasConfig {
      *
      * @var Config
      */
-    private $config;
+    protected $config;
     
     /**
      * Sets the config object.
