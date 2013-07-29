@@ -12,15 +12,16 @@ use Emmetog\Config\Config;
  *
  * @author emmet
  */
-trait HasConfig {
-    
+trait HasConfig
+{
+
     /**
      * The config object.
      *
      * @var Config
      */
     protected $config;
-    
+
     /**
      * Sets the config object.
      * 
@@ -29,8 +30,18 @@ trait HasConfig {
     public function setConfig(Config $config)
     {
         $this->config = $config;
+
+        /**
+         * If the object has an init() method then call it.  This gives the
+         * object a chance to use the config object for initiation (the config
+         * object is not available in the constructor).
+         */
+        if (method_exists($this, 'init'))
+        {
+            $this->init();
+        }
     }
-    
+
 }
 
 ?>
