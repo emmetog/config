@@ -1,2 +1,5 @@
-/nbproject/
 /vendor/
+
+# IDEs
+/nbproject/
+/.idea/

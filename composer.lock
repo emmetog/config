@@ -1,9 +1,11 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
     ],
-    "hash": "c28b5b75d9bf09da322958de3908c442",
+    "hash": "c18105e438263c88141bc9b7a0c5f516",
+    "content-hash": "d3543bb6de597440bbc3c6cac59f9486",
     "packages": [
         {
             "name": "emmetog/cache",
@@ -11,12 +13,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/emmetog/cache.git",
-                "reference": "v1.0.0"
+                "reference": "243edf1056adc41c5a30c7b1c84a0019cdcb0fb9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/emmetog/cache/zipball/v1.0.0",
-                "reference": "v1.0.0",
+                "url": "https://api.github.com/repos/emmetog/cache/zipball/243edf1056adc41c5a30c7b1c84a0019cdcb0fb9",
+                "reference": "243edf1056adc41c5a30c7b1c84a0019cdcb0fb9",
                 "shasum": ""
             },
             "type": "library",
@@ -25,6 +27,7 @@
                     "Emmetog\\Cache\\": "src"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "GPL-3.0"
             ],
@@ -40,27 +43,15 @@
                 "memecached",
                 "registry"
             ],
-            "support": {
-                "source": "https://github.com/emmetog/cache/tree/v1.0.0",
-                "issues": "https://github.com/emmetog/cache/issues"
-            },
             "time": "2013-05-13 18:40:45"
         }
     ],
-    "packages-dev": [
-
-    ],
-    "aliases": [
-
-    ],
+    "packages-dev": [],
+    "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [
-
-    ],
-    "platform": {
-        "php": "~5.4"
-    },
-    "platform-dev": [
-
-    ]
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
 }
